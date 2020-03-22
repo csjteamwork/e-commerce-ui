@@ -1,14 +1,15 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
-import './App.css';
 
-function App() {
+import logo from '../../assets/logo.svg';
+import './index.css';
+
+const AdminHomepage = () => {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/containers/App.js</code> and save to reload.
+          Edit <code>src/components/Admin/index.js</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -21,6 +22,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
-export default App;
+export default AdminHomepage;
