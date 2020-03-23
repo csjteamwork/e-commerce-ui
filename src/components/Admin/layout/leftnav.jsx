@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FeatherIcon from 'feather-icons-react';
 
 const Leftnav = ({ menu, history }) => {
   return (
@@ -8,29 +9,14 @@ const Leftnav = ({ menu, history }) => {
         <div className="sidenav-menu">
           <div className="nav accordion" id="accordionSidenav">
             <div className="sidenav-menu-heading">Menu</div>
-            {menu.map(({ path, name }, index) => (
+            {menu.map(({ path, name, icon }, index) => (
               <Link
                 className={`nav-link${path === history.location.pathname ? ' active' : ''}`}
                 to={path}
                 key={index}
               >
                 <div className="nav-link-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-bar-chart"
-                  >
-                    <line x1="12" y1="20" x2="12" y2="10"></line>
-                    <line x1="18" y1="20" x2="18" y2="4"></line>
-                    <line x1="6" y1="20" x2="6" y2="16"></line>
-                  </svg>
+                  <FeatherIcon icon={icon} />
                 </div>
                 {name}
               </Link>

@@ -3,12 +3,12 @@ const rootPath = '/admin';
 export const verticalMenu = [
   {
     name: 'Dashboard',
-    icon: 'home',
+    icon: 'activity',
     path: rootPath
   },
   {
     name: 'Stock',
-    icon: 'camera',
+    icon: 'shopping-cart',
     path: `${rootPath}/stock`
   }
 ];
