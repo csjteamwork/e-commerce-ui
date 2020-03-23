@@ -5938,13 +5938,13 @@ input[type='button'].btn-block {
 }
 
 .dropdown-menu-left {
-  right: auto;
-  left: 0;
+  right: auto !important;
+  left: 0 !important;
 }
 
 .dropdown-menu-right {
-  right: 0;
-  left: auto;
+  right: 0 !important;
+  left: auto !important;
 }
 
 @media (min-width: 576px) {
@@ -20632,7 +20632,7 @@ body {
 
 .page-header .page-header-content {
   padding-top: 4rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 .page-header .page-header-content .page-header-title {
   line-height: normal;
@@ -21878,7 +21878,7 @@ i-feather svg {
 .datatable table.dataTable thead .sorting_desc:after,
 .datatable table.dataTable thead .sorting_asc_disabled:after,
 .datatable table.dataTable thead .sorting_desc_disabled:after {
-  display: none;
+  /* display: none; */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }

@@ -11,13 +11,8 @@ const Homepage = () => {
         <p>
           Edit <code>src/components/Retail/index.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+        <a className="App-link" href="/admin" rel="noopener noreferrer">
+          Go to Admin panel
         </a>
       </header>
     </div>
