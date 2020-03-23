@@ -24,7 +24,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { children, history } = this.props;
+    const { children, history, pageTitle } = this.props;
     const { leftNavOpen, userDropdown } = this.state;
 
     return (
@@ -37,7 +37,18 @@ class Layout extends Component {
         <div id="layoutSidenav">
           <Leftnav history={history} menu={verticalMenu} />
           <div id="layoutSidenav_content">
-            <main>{children}</main>
+            <main>
+              <div className="page-header pb-10 page-header-dark bg-gradient-primary-to-secondary">
+                <div className="container-fluid">
+                  <div className="page-header-content">
+                    <h1 className="page-header-title">
+                      <span>{pageTitle}</span>
+                    </h1>
+                  </div>
+                </div>
+              </div>
+              <div className="container-fluid mt-n10">{children}</div>
+            </main>
             <Footer />
           </div>
         </div>
