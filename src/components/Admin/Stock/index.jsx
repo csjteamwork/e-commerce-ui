@@ -67,7 +67,7 @@ class StockPage extends Component {
           <div className="card mb-4">
             <div className="card-header">
               Add New Item
-              <Button toggle={this.handleBtnClick} rowData={{}} icon="plus" action="Add" />
+              <Button onClick={this.handleBtnClick} rowData={{}} icon="plus" action="Add" />
             </div>
             <div className="card-body">
               <div className="datatable table-responsive">
