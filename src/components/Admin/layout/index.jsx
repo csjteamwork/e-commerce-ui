@@ -13,14 +13,16 @@ class Layout extends Component {
       leftNavOpen: true,
       userDropdown: false
     };
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleUserToggle = this.handleUserToggle.bind(this);
   }
 
   handleToggle() {
-    this.setState({ leftNavOpen: !this.state.leftNavOpen });
+    this.setState(prevState => ({ ...prevState, leftNavOpen: !this.state.leftNavOpen }));
   }
 
   handleUserToggle() {
-    this.setState({ userDropdown: !this.state.userDropdown });
+    this.setState(prevState => ({ ...prevState, userDropdown: !this.state.userDropdown }));
   }
 
   render() {
@@ -31,8 +33,8 @@ class Layout extends Component {
       <div className={`nav-fixed${!leftNavOpen ? ' sidenav-toggled' : ''}`}>
         <Header
           userDropdown={userDropdown}
-          onToggle={() => this.handleToggle()}
-          userDropdownToggle={() => this.handleUserToggle()}
+          onToggle={this.handleToggle}
+          userDropdownToggle={this.handleUserToggle}
         />
         <div id="layoutSidenav">
           <Leftnav history={history} menu={verticalMenu} />

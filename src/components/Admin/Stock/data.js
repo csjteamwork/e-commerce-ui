@@ -34,6 +34,12 @@ export const columns = [
     field: 'salary',
     sort: 'asc',
     width: 100
+  },
+  {
+    label: 'Actions',
+    field: 'actions',
+    sort: 'asc',
+    width: 100
   }
 ];
 

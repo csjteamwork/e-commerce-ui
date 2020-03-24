@@ -1,48 +1,93 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import { MDBDataTable } from 'mdbreact';
-import FeatherIcon from 'feather-icons-react';
 
 import Layout from '../layout';
+import Button from './Button';
+import ModalForm from './modalForm';
 import { columns, rows } from './data';
 
-columns.push({
-  label: 'Actions',
-  field: 'actions',
-  sort: 'asc',
-  width: 100
-});
+class StockPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {
+        columns,
+        rows: []
+      },
+      modalFormData: {},
+      modalAction: '',
+      modal: false
+    };
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-const btn = () => {
-  return (
-    <button className="btn btn-datatable btn-icon btn-transparent-dark">
-      <FeatherIcon icon="edit-2" />
-    </button>
-  );
-};
+  componentDidMount() {
+    const modRows = rows.map(row => ({
+      ...row,
+      actions: (
+        <Fragment>
+          <Button onClick={this.handleBtnClick} rowData={row} icon="edit-2" action="Edit" />
+          <Button onClick={() => null} rowData={row} icon="trash-2" action="Delete" />
+        </Fragment>
+      )
+    }));
 
-const modRows = rows.map(row => ({
-  ...row,
-  actions: btn()
-}));
+    this.setState(prevState => ({ ...prevState, data: { ...prevState.data, rows: modRows } }));
+  }
 
-const StockPage = ({ history }) => {
-  const data = {
-    columns,
-    rows: modRows
-  };
+  handleBtnClick(rowData, action) {
+    this.setState(prevState => ({
+      ...prevState,
+      modal: !this.state.modal,
+      modalAction: action,
+      modalFormData: rowData
+    }));
+  }
 
-  return (
-    <Layout history={history} pageTitle="Stock">
-      <div className="card mb-4">
-        <div className="card-header">Title goes here</div>
-        <div className="card-body">
-          <div className="datatable table-responsive">
-            <MDBDataTable bordered hover noBottomColumns responsive btn data={data} />
+  handleToggle() {
+    this.setState(prevState => ({ ...prevState, modal: !this.state.modal }));
+  }
+
+  handleSubmit(values, { setSubmitting }) {
+    setTimeout(() => {
+      console.log(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
+  }
+
+  render() {
+    const { history } = this.props;
+    const { data, modal, modalAction, modalFormData } = this.state;
+
+    return (
+      <Fragment>
+        <Layout history={history} pageTitle="Stock">
+          <div className="card mb-4">
+            <div className="card-header">
+              Add New Item
+              <Button toggle={this.handleBtnClick} rowData={{}} icon="plus" action="Add" />
+            </div>
+            <div className="card-body">
+              <div className="datatable table-responsive">
+                <MDBDataTable bordered hover noBottomColumns responsive btn data={data} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </Layout>
-  );
-};
+        </Layout>
+        {modal && (
+          <ModalForm
+            open={modal}
+            toggle={this.handleToggle}
+            onSubmit={this.handleSubmit}
+            action={modalAction}
+            data={modalFormData}
+          />
+        )}
+      </Fragment>
+    );
+  }
+}
 
 export default StockPage;

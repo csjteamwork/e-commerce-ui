@@ -1,4 +1,6 @@
 @charset "UTF-8";
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~tachyons/css/tachyons.css';
 /*!
 * Start Bootstrap - SB Admin Pro v1.1.2 (https://shop.startbootstrap.com/product/sb-admin-pro)
 * Copyright 2013-2020 Start Bootstrap
