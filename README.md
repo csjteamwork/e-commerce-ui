@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Project Structure (/src)
+### - apis (where api calls are composed)
+### - assets (contains imgs, fonts, library-level css files)
+### - components (pages and shared re-usable components)
+- Admin (pages for the admin section of the website)
+- Retail (pages for the retail section of the website)
+- Shared (re-usable components across site)
+### - helpers (contains re-usable methods to carry out mundane tasks)
+### - App.js (configure routing)
+### - history.js (browser routing)
+### - routes.js (where custom page routes are added)
+### - index.js (app entry point)
+
 ## Available Scripts
 
 In the project directory, you can run:
