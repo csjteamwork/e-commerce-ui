@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { MDBDataTable } from 'mdbreact';
+import moment from 'moment';
 
 import Layout from '../layout';
 import Button from './Button';
 import ModalForm from './modalForm';
-import { columns, rows } from './data';
+import { columns } from './data';
+
+import { getProducts, createProduct } from '../../../apis';
 
 class StockPage extends Component {
   constructor(props) {
@@ -21,20 +24,27 @@ class StockPage extends Component {
     this.handleToggle = this.handleToggle.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.modifyRowObject = this.modifyRowObject.bind(this);
   }
 
   componentDidMount() {
-    const modRows = rows.map(row => ({
+    getProducts().then(d => {
+      const modRows = d.data.map(this.modifyRowObject);
+      this.setState(prevState => ({ ...prevState, data: { ...prevState.data, rows: modRows } }));
+    });
+  }
+
+  modifyRowObject(row) {
+    return {
       ...row,
+      create_date: moment(row.create_date).format('DD/MM/YYYY HH:mm:ss'),
       actions: (
         <Fragment>
           <Button onClick={this.handleBtnClick} rowData={row} icon="edit-2" action="Edit" />
           <Button onClick={() => null} rowData={row} icon="trash-2" action="Delete" />
         </Fragment>
       )
-    }));
-
-    this.setState(prevState => ({ ...prevState, data: { ...prevState.data, rows: modRows } }));
+    };
   }
 
   handleBtnClick(rowData, action) {
@@ -51,10 +61,20 @@ class StockPage extends Component {
   }
 
   handleSubmit(values, { setSubmitting }) {
-    setTimeout(() => {
-      console.log(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+    const { modalAction } = this.state;
+
+    if (modalAction === 'Add') {
+      createProduct(values).then(d => {
+        const newRow = this.modifyRowObject(d.data);
+
+        this.setState(prevState => ({
+          ...prevState,
+          data: { ...prevState.data, rows: [newRow, ...prevState.data.rows] }
+        }));
+        this.handleToggle();
+      });
+    }
+    setSubmitting(false);
   }
 
   render() {
@@ -71,7 +91,17 @@ class StockPage extends Component {
             </div>
             <div className="card-body">
               <div className="datatable table-responsive">
-                <MDBDataTable bordered hover noBottomColumns responsive btn data={data} />
+                {data.rows.length > 0 && (
+                  <MDBDataTable
+                    bordered
+                    hover
+                    noBottomColumns
+                    responsive
+                    btn
+                    data={data}
+                    order={['create_date', 'desc']}
+                  />
+                )}
               </div>
             </div>
           </div>

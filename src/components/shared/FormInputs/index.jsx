@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 const FormInputs = ({ field, form, label, ...rest }) => {
+  // console.log('field', field.value || '');
   return (
     <div className="form-group">
       {rest.type === 'checkbox' ? (
@@ -21,7 +22,7 @@ const FormInputs = ({ field, form, label, ...rest }) => {
           </label>
           <input
             className="form-control"
-            value={field.value === null ? '' : field.value}
+            value={field.value || ''}
             {...field}
             {...rest}
             id={field.name}

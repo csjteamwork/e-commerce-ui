@@ -1,67 +1,33 @@
-const baseUrl = 'http://localhost:8080';
+import axios from 'axios';
 
-export async function getData(url = '', headers = {}) {
-  const response = await fetch(baseUrl + url, {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer'
+axios.defaults.baseURL = 'http://localhost:8080';
+
+export async function getData(url = '') {
+  return await axios.request({
+    url,
+    method: 'get'
   });
-  return await response.json();
 }
 
-export async function postData(url = '', data = {}, headers = {}) {
-  const response = await fetch(baseUrl + url, {
-    method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    body: JSON.stringify(data)
+export async function postData(url = '', data = {}) {
+  return await axios.request({
+    url,
+    method: 'post',
+    data
   });
-  return await response.json();
 }
 
-export async function putData(url = '', data = {}, headers = {}) {
-  const response = await fetch(baseUrl + url, {
-    method: 'PUT',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    body: JSON.stringify(data)
+export async function putData(url = '', data = {}) {
+  return await axios.request({
+    url,
+    method: 'put',
+    data
   });
-  return await response.json();
 }
 
-export async function deleteData(url = '', headers = {}) {
-  const response = await fetch(baseUrl + url, {
-    method: 'DELETE',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer'
+export async function deleteData(url = '') {
+  return await axios.request({
+    url,
+    method: 'delete'
   });
-  return await response.json();
 }

@@ -9,37 +9,30 @@ export const formFormFields = [
     required: true
   },
   {
-    type: 'text',
-    name: 'position',
-    label: 'Position',
+    type: 'number',
+    name: 'amount',
+    label: 'Amount',
+    component: FormInputs,
+    required: true
+  },
+  {
+    type: 'number',
+    name: 'quantity',
+    label: 'Quantity',
+    component: FormInputs,
+    required: true
+  },
+  {
+    type: 'number',
+    name: 'minimumQuantity',
+    label: 'Minimum Quantity',
     component: FormInputs,
     required: true
   },
   {
     type: 'text',
-    name: 'office',
-    label: 'Office',
-    component: FormInputs,
-    required: true
-  },
-  {
-    type: 'text',
-    name: 'age',
-    label: 'Age',
-    component: FormInputs,
-    required: true
-  },
-  {
-    type: 'text',
-    name: 'salary',
-    label: 'Salary',
-    component: FormInputs,
-    required: true
-  },
-  {
-    type: 'text',
-    name: 'date',
-    label: 'Date',
+    name: 'description',
+    label: 'Description',
     component: FormInputs,
     required: true
   }
